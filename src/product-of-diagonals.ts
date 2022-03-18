@@ -1,8 +1,8 @@
 export function getPathThroughDiagonals(inputArray: number[][]): number {
   const n: number = inputArray.length;
-  let sumOfRightDiagonals: number = 0;
-  let sumOfLeftDiagonals: number = 0;
-  let indexVector: number[] = [0, 0]; // i,j
+  let sumOfRightDiagonals = 0;
+  let sumOfLeftDiagonals = 0;
+  let indexVector = [0, 0]; // i,j
   let incrementVector: number[][] = [[1], [0]]; // start by moving one down
 
   if (inputArray.length === 1) {
@@ -14,7 +14,7 @@ export function getPathThroughDiagonals(inputArray: number[][]): number {
       indexVector,
       inputArray,
     ); // get numbers in right diagonal
-    let rightDiagonalProduct = multiplyNumberArray(numbersInRightDiagonal); // get sum of right diagonal
+    const rightDiagonalProduct = multiplyNumberArray(numbersInRightDiagonal); // get sum of right diagonal
 
     const leftIndexVector: number[] = [
       indexVector[0],
@@ -24,7 +24,7 @@ export function getPathThroughDiagonals(inputArray: number[][]): number {
       leftIndexVector,
       inputArray,
     ); // get numbers in right diagonal
-    let leftDiagonalProduct = multiplyNumberArray(numbersInLeftDiagonal); // get sum of right diagonal
+    const leftDiagonalProduct = multiplyNumberArray(numbersInLeftDiagonal); // get sum of right diagonal
 
     sumOfRightDiagonals = sumOfRightDiagonals + rightDiagonalProduct;
     sumOfLeftDiagonals = sumOfLeftDiagonals + leftDiagonalProduct; // add it to the sum of diagonals
@@ -50,15 +50,14 @@ function getNumbersInRightDiagonal(
   while (!topRowHit(indexPair[0]) && !rightColumnHit(indexPair[1])) {
     indexPair = vectorAdd(indexPair, northEastVector);
   }
-  const edgeIndex = indexPair;
 
   const southWestVector = [[1], [-1]];
   while (!bottomRowHit(indexPair[0]) && !leftColumnHit(indexPair[1])) {
-    let valueToPush: number = inputArray[indexPair[0]][indexPair[1]]; // get value
+    const valueToPush: number = inputArray[indexPair[0]][indexPair[1]]; // get value
     numbersInDiagonal.push(valueToPush); // add it to the array
     indexPair = vectorAdd(indexPair, southWestVector); // modify access
   }
-  let valueToPush: number = inputArray[indexPair[0]][indexPair[1]]; // get last value
+  const valueToPush: number = inputArray[indexPair[0]][indexPair[1]]; // get last value
   numbersInDiagonal.push(valueToPush); // add it to the array
 
   return numbersInDiagonal;
@@ -79,15 +78,14 @@ function getNumbersInLeftDiagonal(
   while (!topRowHit(indexPair[0]) && !leftColumnHit(indexPair[1])) {
     indexPair = vectorAdd(indexPair, northWestVector);
   }
-  const edgeIndex = indexPair;
 
   const southEastVector = [[1], [1]];
   while (!bottomRowHit(indexPair[0]) && !rightColumnHit(indexPair[1])) {
-    let valueToPush: number = inputArray[indexPair[0]][indexPair[1]]; // get value
+    const valueToPush: number = inputArray[indexPair[0]][indexPair[1]]; // get value
     numbersInDiagonal.push(valueToPush); // add it to the array
     indexPair = vectorAdd(indexPair, southEastVector); // modify access
   }
-  let valueToPush: number = inputArray[indexPair[0]][indexPair[1]]; // get last value
+  const valueToPush: number = inputArray[indexPair[0]][indexPair[1]]; // get last value
   numbersInDiagonal.push(valueToPush); // add it to the array
 
   return numbersInDiagonal;
